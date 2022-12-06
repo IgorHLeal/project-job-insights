@@ -6,7 +6,7 @@ def get_unique_industries(path: str) -> List[str]:
     industries = read(path)
     list_industries = set()
     for industry in industries:
-        list_industries.add(industry["industy"])
+        list_industries.add(industry["industry"])
     return list_industries
 
 
