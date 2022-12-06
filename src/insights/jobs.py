@@ -6,10 +6,8 @@ import csv
 @lru_cache
 def read(path: str) -> List[Dict]:
     with open(path, encoding="utf8") as file:
-        writer = csv.DictReader(file, delimiter=',', quotechar='"')
-        data_job = []
-        for data in writer:
-            data_job.append(data)
+        reader = csv.DictReader(file, delimiter=',', quotechar='"')
+        data_job = list(reader)
         return data_job
 
 
