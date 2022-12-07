@@ -21,19 +21,22 @@ def get_min_salary(path: str) -> int:
 
 
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
+    min_salary = job.get("min_salary")
+    max_salary = job.get("max_salary")
+
     if "min_salary" not in job or "max_salary" not in job:
-        raise ValueError
+        raise ValueError("min_salary ou max_salary ausentes no dicionário")
 
-    if (type(job["min_salary"]) or type(job["max_salary"])) is not int:
-        raise ValueError
+    if type(min_salary) is not int or type(max_salary) is not int:
+        raise ValueError("min_salary ou max_salary tem valores não-numéricos")
 
-    if job["min_salary"] > job["max_salary"]:
-        raise ValueError
+    if int(min_salary) > int(max_salary):
+        raise ValueError("min_salary é maior que o valor de max_salary")
 
-    if type(salary) is not int:
-        raise ValueError
+    if not str(salary).lstrip("-").isdigit():
+        raise ValueError("salary tem valores não numéricos")
 
-    return int(job["min_salary"]) <= int(salary) <= int(job["max_salary"])
+    return int(min_salary) <= int(salary) <= int(max_salary)
 
 
 def filter_by_salary_range(
